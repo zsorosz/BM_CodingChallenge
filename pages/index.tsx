@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import useGetCart from "../src/hooks/useGetCart";
 import useGetProducts from "../src/hooks/useGetProducts";
@@ -46,55 +47,56 @@ const Home: NextPage = () => {
                             setSearchQuery={setSearchQuery}
                         />
                         <div className={styles.cart}>
-                            <h1>Cart</h1>
+                            <Image
+                                src="/shopping-cart.png"
+                                width={30}
+                                height={30}
+                                alt="My shopping cart"
+                            />
                             <pre>
                                 {JSON.stringify(
                                     cart.data?.products.length,
                                     null,
                                     4
-                                )}{" "}
-                                Items
+                                )}
                             </pre>
                         </div>
                     </header>
                     <main className={styles.main}>
-                        <section>
-                            <h2>Products</h2>
-                            <pre>
-                                {JSON.stringify(
-                                    products.data?.pageInfo.totalCount,
-                                    null,
-                                    4
-                                )}{" "}
-                                Products
-                            </pre>
-                            <ul className={styles.grid}>
-                                {products.data?.edges.map((product) =>
-                                    product.node.name
-                                        .toLowerCase()
-                                        .includes(searchQuery.toLowerCase()) ? (
-                                        <li key={product.node.id}>
-                                            <Tile
-                                                name={product.node.name}
-                                                image={product.node.image}
-                                                basePrice={
-                                                    product.node.prices
-                                                        .basePrice
-                                                }
-                                                baseUnit={
-                                                    product.node.prices.baseUnit
-                                                }
-                                                sku={product.node.sku}
-                                                cart={
-                                                    cart.data
-                                                        ?.products as IProductTile[]
-                                                }
-                                            />
-                                        </li>
-                                    ) : null
-                                )}
-                            </ul>
-                        </section>
+                        <h2>Products</h2>
+                        <pre>
+                            {JSON.stringify(
+                                products.data?.pageInfo.totalCount,
+                                null,
+                                4
+                            )}{" "}
+                            Products
+                        </pre>
+                        <ul className={styles.grid}>
+                            {products.data?.edges.map((product) =>
+                                product.node.name
+                                    .toLowerCase()
+                                    .includes(searchQuery.toLowerCase()) ? (
+                                    <li key={product.node.id}>
+                                        <Tile
+                                            name={product.node.name}
+                                            image={product.node.image}
+                                            basePrice={
+                                                product.node.prices.basePrice
+                                            }
+                                            baseUnit={
+                                                product.node.prices.baseUnit
+                                            }
+                                            sku={product.node.sku}
+                                            cart={
+                                                cart.data
+                                                    ?.products as IProductTile[]
+                                            }
+                                        />
+                                    </li>
+                                ) : null
+                            )}
+                        </ul>
                     </main>
                     <footer>Footer</footer>
                 </>
