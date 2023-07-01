@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useGetCart from "../src/hooks/useGetCart";
 import useGetProducts from "../src/hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
+import Tile from "../components/Tile";
 
 const Home: NextPage = () => {
     const products = useGetProducts();
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
         setCanRender(true);
     }, []);
     if (!canRender) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     return (
@@ -27,9 +28,15 @@ const Home: NextPage = () => {
 
             <h1>Cart</h1>
             <pre>{JSON.stringify(cart.data?.products.length, null, 4)}</pre>
-
+            <section>
+                {cart.data?.products.map((product) => (
+                    <Tile key={product.id} productData={product} />
+                ))}
+            </section>
             <h2>Products</h2>
-            <pre>{JSON.stringify(products.data?.pageInfo.totalCount, null, 4)}</pre>
+            <pre>
+                {JSON.stringify(products.data?.pageInfo.totalCount, null, 4)}
+            </pre>
         </div>
     );
 };
