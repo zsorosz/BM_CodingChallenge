@@ -1,28 +1,37 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { IProductTile } from "../src/types";
+import styles from "../styles/Tile.module.css";
 
 type TileProps = {
-    productData: IProductTile;
+    name: string;
+    image: string;
+    basePrice: number;
+    baseUnit: string;
+    sku: string;
 };
 
-const Tile: React.FC<TileProps> = ({ productData }) => {
-    const [imageSrc, setImageSrc] = useState(
-        `https:${productData.image}?imwidth=300`
-    );
-    console.log(productData);
+const Tile: React.FC<TileProps> = ({
+    name,
+    image,
+    basePrice,
+    baseUnit,
+    sku,
+}) => {
+    const [imageSrc, setImageSrc] = useState(`https:${image}?imwidth=300`);
     return (
-        <figure className="tile-ctn">
+        <figure className={styles.card}>
             <Image
                 src={imageSrc}
                 onError={() => setImageSrc("/bm_logo.jpg")}
                 width={300}
                 height={300}
                 alt="Product image"
+                placeholder="blur"
+                blurDataURL="/bm_logo.jpg"
             />
-            <figcaption>{productData.name}</figcaption>
+            <figcaption>{name}</figcaption>
             <h4>
-                {productData.basePrice}€ / {productData.baseUnit}
+                {basePrice}€ / {baseUnit}
             </h4>
         </figure>
     );

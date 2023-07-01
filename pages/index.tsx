@@ -9,6 +9,7 @@ import Tile from "../components/Tile";
 const Home: NextPage = () => {
     const products = useGetProducts();
     const cart = useGetCart();
+    console.log(products);
 
     // canRender is only to ensure that it is rendered as SPA
     // (disable server side rendering)
@@ -26,13 +27,19 @@ const Home: NextPage = () => {
                 <title>Bringmeister Coding Challenge</title>
             </Head>
 
-            <section className="cart">
+            <section className={styles.container}>
                 <h1>Cart</h1>
                 <pre>{JSON.stringify(cart.data?.products.length, null, 4)}</pre>
-                <ul className="product-list">
+                <ul className={styles.grid}>
                     {cart.data?.products.map((product) => (
                         <li key={product.id}>
-                            <Tile productData={product} />
+                            <Tile
+                                name={product.name}
+                                image={product.image}
+                                basePrice={product.basePrice}
+                                baseUnit={product.baseUnit}
+                                sku={product.sku}
+                            />
                         </li>
                     ))}
                 </ul>
@@ -41,6 +48,19 @@ const Home: NextPage = () => {
             <pre>
                 {JSON.stringify(products.data?.pageInfo.totalCount, null, 4)}
             </pre>
+            <ul className={styles.grid}>
+                {products.data?.edges.map((product) => (
+                    <li key={product.node.id}>
+                        <Tile
+                            name={product.node.name}
+                            image={product.node.image}
+                            basePrice={product.node.prices.basePrice}
+                            baseUnit={product.node.prices.baseUnit}
+                            sku={product.node.sku}
+                        />
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

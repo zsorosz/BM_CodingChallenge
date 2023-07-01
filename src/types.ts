@@ -1,7 +1,8 @@
 export interface IProductTile {
     name: string;
     image: string;
-    basePrice: number;
-    baseUnit: string;
-    sku: string
+    prices?: object;
+    basePrice?: number;
+    baseUnit?: string;
+    sku: string;
 }
