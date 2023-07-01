@@ -1,10 +1,24 @@
 .container {
   min-height: 100vh;
+  width: 100vw;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  background-color: rgb(250, 243, 234);
+} 
+
+.container header {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  gap: 2rem;
+}
+
+.container input {
+  flex: 1;
+  border: 1px solid grey;
+  border-radius: 5px;
 }
 
 .main {
@@ -32,7 +46,7 @@
   flex-grow: 1;
 }
 
-.title a {
+/* .title a {
   color: #0070f3;
   text-decoration: none;
 }
@@ -118,4 +132,4 @@
     width: 100%;
     flex-direction: column;
   }
-}
+} */

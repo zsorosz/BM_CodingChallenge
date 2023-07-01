@@ -19,21 +19,21 @@ const Tile: React.FC<TileProps> = ({
 }) => {
     const [imageSrc, setImageSrc] = useState(`https:${image}?imwidth=300`);
     return (
-        <figure className={styles.card}>
+        <div className={styles.card}>
             <Image
                 src={imageSrc}
                 onError={() => setImageSrc("/bm_logo.jpg")}
                 width={300}
                 height={300}
-                alt="Product image"
+                alt={name}
                 placeholder="blur"
                 blurDataURL="/bm_logo.jpg"
             />
-            <figcaption>{name}</figcaption>
+            <h2>{name}</h2>
             <h4>
                 {basePrice}€ / {baseUnit}
             </h4>
-        </figure>
+        </div>
     );
 };
 
