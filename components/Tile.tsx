@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Tile.module.css";
+import useCountInCart from "../src/hooks/useCountInCart";
+import { IProductTile } from "../src/types";
 
 type TileProps = {
     name: string;
@@ -8,6 +10,7 @@ type TileProps = {
     basePrice: number;
     baseUnit: string;
     sku: string;
+    cart: IProductTile[];
 };
 
 const Tile: React.FC<TileProps> = ({
@@ -16,8 +19,10 @@ const Tile: React.FC<TileProps> = ({
     basePrice,
     baseUnit,
     sku,
+    cart,
 }) => {
     const [imageSrc, setImageSrc] = useState(`https:${image}?imwidth=300`);
+
     return (
         <div className={styles.card}>
             <Image
@@ -33,6 +38,7 @@ const Tile: React.FC<TileProps> = ({
             <h4>
                 {basePrice}€ / {baseUnit}
             </h4>
+            <h6>Added to cart: {useCountInCart({ sku, cart })}</h6>
         </div>
     );
 };
