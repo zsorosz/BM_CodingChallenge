@@ -26,12 +26,16 @@ const Home: NextPage = () => {
                 <title>Bringmeister Coding Challenge</title>
             </Head>
 
-            <h1>Cart</h1>
-            <pre>{JSON.stringify(cart.data?.products.length, null, 4)}</pre>
-            <section>
-                {cart.data?.products.map((product) => (
-                    <Tile key={product.id} productData={product} />
-                ))}
+            <section className="cart">
+                <h1>Cart</h1>
+                <pre>{JSON.stringify(cart.data?.products.length, null, 4)}</pre>
+                <ul className="product-list">
+                    {cart.data?.products.map((product) => (
+                        <li key={product.id}>
+                            <Tile productData={product} />
+                        </li>
+                    ))}
+                </ul>
             </section>
             <h2>Products</h2>
             <pre>
