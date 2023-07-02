@@ -37,7 +37,9 @@ const Tile: React.FunctionComponent<TileProps> = ({
             <h3>
                 {basePrice}€ / {baseUnit}
             </h3>
-            <h4>Added to cart: {useCountInCart({ sku })}</h4>
+            <h4 data-testid="countInCart">
+                Added to cart: {useCountInCart({ sku })}
+            </h4>
         </div>
     );
 };

@@ -13,7 +13,9 @@ const Cart: React.FunctionComponent = () => {
                 height={30}
                 alt="My shopping cart"
             />
-            <pre>{JSON.stringify(cart?.data?.products.length, null, 4)}</pre>
+            <pre data-testid="cartCount">
+                {JSON.stringify(cart?.data?.products.length, null, 4)}
+            </pre>
         </div>
     );
 };
