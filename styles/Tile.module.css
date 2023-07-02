@@ -1,5 +1,6 @@
 .card {
-    margin: 1rem;
+    margin: 0 auto;
+    max-width: 20rem;
     padding: 1rem;
     text-align: left;
     color: inherit;
@@ -32,14 +33,14 @@
     font-size: 1.2rem;
   }
   
-  .card h4 {
+  .card h3 {
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
   }
 
-  .card h6 {
+  .card h4 {
     position: absolute;
     right: 1.5rem;
     bottom: 0;

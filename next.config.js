@@ -6,8 +6,6 @@ module.exports = {
             {
                 protocol: "https",
                 hostname: "assets.bringmeister.de",
-                // port: "",
-                // pathname: "/account123/**",
             },
         ],
     },

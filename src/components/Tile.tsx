@@ -34,10 +34,10 @@ const Tile: React.FunctionComponent<TileProps> = ({
                 blurDataURL="/bm_logo.jpg"
             />
             <h2>{name}</h2>
-            <h4>
+            <h3>
                 {basePrice}€ / {baseUnit}
-            </h4>
-            <h6>Added to cart: {useCountInCart({ sku })}</h6>
+            </h3>
+            <h4>Added to cart: {useCountInCart({ sku })}</h4>
         </div>
     );
 };

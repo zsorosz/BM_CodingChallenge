@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+// Custom hook to count the number of products with a specific SKU in the cart
+
+import { useEffect, useState, useContext } from "react"; 
 import { CartContext } from "../contexts/CartContext";
 import { IProductTile } from "../types";
-
-// Custom hook to count the number of products with a specific SKU in the cart
 
 type CountInCartProps = {
     sku: string;

@@ -1,13 +1,14 @@
-import type { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import type { NextPage } from "next";
 import { useEffect, useState, useContext } from "react";
+import Head from "next/head";
 import { CartContext } from "../src/contexts/CartContext";
 import useGetProducts from "../src/hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
-import Tile from "../src/components/Tile";
 import Search from "../src/components/Search";
 import Loading from "../src/components/Loading";
+import Cart from "../src/components/Cart";
+import ProductList from "../src/components/ProductList";
+import Footer from "../src/components/Footer";
 
 const Home: NextPage = () => {
     // canRender is only to ensure that it is rendered as SPA
@@ -18,7 +19,6 @@ const Home: NextPage = () => {
 
     // Use the CartContext to access the cart state and data
     const { cart } = useContext(CartContext);
-
     const products = useGetProducts();
 
     // Check if both products and cart data have finished loading
@@ -32,6 +32,7 @@ const Home: NextPage = () => {
     useEffect(() => {
         setCanRender(true);
     }, []);
+
     if (!canRender) <Loading />;
 
     return (
@@ -48,24 +49,10 @@ const Home: NextPage = () => {
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
                         />
-                        <div className={styles.cart}>
-                            <Image
-                                src="/shopping-cart.png"
-                                width={30}
-                                height={30}
-                                alt="My shopping cart"
-                            />
-                            <pre>
-                                {JSON.stringify(
-                                    cart?.data?.products.length,
-                                    null,
-                                    4
-                                )}
-                            </pre>
-                        </div>
+                        <Cart />
                     </header>
                     <main className={styles.main}>
-                        <h2>Products</h2>
+                        <h1>Products</h1>
                         <pre>
                             {JSON.stringify(
                                 products.data?.pageInfo.totalCount,
@@ -74,29 +61,12 @@ const Home: NextPage = () => {
                             )}{" "}
                             Products
                         </pre>
-                        <ul className={styles.grid}>
-                            {products.data?.edges.map((product) =>
-                                product.node.name
-                                    .toLowerCase()
-                                    .includes(searchQuery.toLowerCase()) ? (
-                                    <li key={product.node.id}>
-                                        <Tile
-                                            name={product.node.name}
-                                            image={product.node.image}
-                                            basePrice={
-                                                product.node.prices.basePrice
-                                            }
-                                            baseUnit={
-                                                product.node.prices.baseUnit
-                                            }
-                                            sku={product.node.sku}
-                                        />
-                                    </li>
-                                ) : null
-                            )}
-                        </ul>
+                        <ProductList
+                            products={products.data?.edges}
+                            searchQuery={searchQuery}
+                        />
                     </main>
-                    <footer>Footer</footer>
+                    <Footer />
                 </>
             )}
         </div>

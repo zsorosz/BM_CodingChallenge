@@ -5,6 +5,19 @@ export interface IProductTile {
     baseUnit: string;
     sku: string;
 }
+export interface IProductList {
+    cursor: string;
+    node?: {
+        name: string, 
+        id: string, 
+        image: string, 
+        sku: string, 
+        prices: {
+            basePrice: number, 
+            baseUnit: string
+            }
+        }
+}
 
 export interface ICartData {
     reservation: null;
