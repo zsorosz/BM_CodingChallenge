@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import useGetCart from "../src/hooks/useGetCart";
 import useGetProducts from "../src/hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
-import Tile from "../components/Tile";
-import Search from "../components/Search";
+import Tile from "../src/components/Tile";
+import Search from "../src/components/Search";
 import { IProductTile } from "../src/types";
+import Loading from "../src/components/Loading";
 
 const Home: NextPage = () => {
     // canRender is only to ensure that it is rendered as SPA
@@ -29,13 +30,13 @@ const Home: NextPage = () => {
         setCanRender(true);
     }, []);
     if (!canRender) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (
         <div className={styles.container}>
             {isLoading ? (
-                <p>Loading....</p>
+                <Loading />
             ) : (
                 <>
                     <header>

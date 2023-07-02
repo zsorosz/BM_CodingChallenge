@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import styles from "../styles/Tile.module.css";
-import useCountInCart from "../src/hooks/useCountInCart";
-import { IProductTile } from "../src/types";
+import styles from "../../styles/Tile.module.css";
+import useCountInCart from "../hooks/useCountInCart";
+import { IProductTile } from "../types";
 
 type TileProps = {
     name: string;
