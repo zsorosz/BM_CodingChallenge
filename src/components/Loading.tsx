@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 
-const Loading: React.FC = () => {
+const Loading: React.FunctionComponent = () => {
     return (
         <div className={styles.loading}>
             <Image

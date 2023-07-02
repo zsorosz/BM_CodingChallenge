@@ -5,7 +5,10 @@ type SearchProps = {
     setSearchQuery: (query: string) => void;
 };
 
-const Search: React.FC<SearchProps> = ({ searchQuery, setSearchQuery }) => {
+const Search: React.FunctionComponent<SearchProps> = ({
+    searchQuery,
+    setSearchQuery,
+}) => {
     return (
         <input
             type="search"

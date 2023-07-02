@@ -1,13 +1,12 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import useGetCart from "../src/hooks/useGetCart";
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "../src/contexts/CartContext";
 import useGetProducts from "../src/hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
 import Tile from "../src/components/Tile";
 import Search from "../src/components/Search";
-import { IProductTile } from "../src/types";
 import Loading from "../src/components/Loading";
 
 const Home: NextPage = () => {
@@ -17,32 +16,34 @@ const Home: NextPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const products = useGetProducts();
-    const cart = useGetCart();
+    // Use the CartContext to access the cart state and data
+    const { cart } = useContext(CartContext);
 
+    const products = useGetProducts();
+
+    // Check if both products and cart data have finished loading
+    // Set the isLoading state to false when both are loaded
     useEffect(() => {
-        if (!products.loading && !cart.loading) {
+        if (products.data && cart?.data) {
             setIsLoading(false);
         }
-    }, [products.loading, cart.loading]);
+    }, [products.loading, cart?.loading]);
 
     useEffect(() => {
         setCanRender(true);
     }, []);
-    if (!canRender) {
-        return <Loading />;
-    }
+    if (!canRender) <Loading />;
 
     return (
         <div className={styles.container}>
+            <Head>
+                <title>Bringmeister Coding Challenge</title>
+            </Head>
             {isLoading ? (
                 <Loading />
             ) : (
                 <>
                     <header>
-                        <Head>
-                            <title>Bringmeister Coding Challenge</title>
-                        </Head>
                         <Search
                             searchQuery={searchQuery}
                             setSearchQuery={setSearchQuery}
@@ -56,7 +57,7 @@ const Home: NextPage = () => {
                             />
                             <pre>
                                 {JSON.stringify(
-                                    cart.data?.products.length,
+                                    cart?.data?.products.length,
                                     null,
                                     4
                                 )}
@@ -89,10 +90,6 @@ const Home: NextPage = () => {
                                                 product.node.prices.baseUnit
                                             }
                                             sku={product.node.sku}
-                                            cart={
-                                                cart.data
-                                                    ?.products as IProductTile[]
-                                            }
                                         />
                                     </li>
                                 ) : null

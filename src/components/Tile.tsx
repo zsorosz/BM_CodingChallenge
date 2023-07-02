@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "../../styles/Tile.module.css";
 import useCountInCart from "../hooks/useCountInCart";
-import { IProductTile } from "../types";
 
 type TileProps = {
     name: string;
@@ -10,24 +9,24 @@ type TileProps = {
     basePrice: number;
     baseUnit: string;
     sku: string;
-    cart: IProductTile[];
 };
 
-const Tile: React.FC<TileProps> = ({
+const Tile: React.FunctionComponent<TileProps> = ({
     name,
     image,
     basePrice,
     baseUnit,
     sku,
-    cart,
 }) => {
-    const [imageSrc, setImageSrc] = useState(`https:${image}?imwidth=300`);
+    const [imageSrc, setImageSrc] = useState(
+        image ? `https:${image}?imwidth=300` : "/bm_logo.jpg"
+    );
 
     return (
         <div className={styles.card}>
             <Image
                 src={imageSrc}
-                onError={() => setImageSrc("/bm_logo.jpg")}
+                onError={() => setImageSrc("/bm_logo.jpg")} //sets the image source to the fallback image
                 width={300}
                 height={300}
                 alt={name}
@@ -38,7 +37,7 @@ const Tile: React.FC<TileProps> = ({
             <h4>
                 {basePrice}€ / {baseUnit}
             </h4>
-            <h6>Added to cart: {useCountInCart({ sku, cart })}</h6>
+            <h6>Added to cart: {useCountInCart({ sku })}</h6>
         </div>
     );
 };
