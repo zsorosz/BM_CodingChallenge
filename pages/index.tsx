@@ -53,7 +53,7 @@ const Home: NextPage = () => {
                     </header>
                     <main className={styles.main}>
                         <h1>Products</h1>
-                        <pre>
+                        <pre data-testid="productCount">
                             {JSON.stringify(
                                 products.data?.pageInfo.totalCount,
                                 null,
