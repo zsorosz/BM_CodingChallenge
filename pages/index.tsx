@@ -1,14 +1,11 @@
 import type { NextPage } from "next";
 import { useEffect, useState, useContext } from "react";
-import Head from "next/head";
 import { CartContext } from "../src/contexts/CartContext";
 import useGetProducts from "../src/hooks/useGetProducts";
 import styles from "../styles/Home.module.css";
-import Search from "../src/components/Search";
 import Loading from "../src/components/Loading";
-import Cart from "../src/components/Cart";
 import ProductList from "../src/components/ProductList";
-import Footer from "../src/components/Footer";
+import Header from "../src/components/Header";
 
 const Home: NextPage = () => {
     // canRender is only to ensure that it is rendered as SPA
@@ -19,6 +16,8 @@ const Home: NextPage = () => {
 
     // Use the CartContext to access the cart state and data
     const { cart } = useContext(CartContext);
+
+    //tbd: move products data to own context
     const products = useGetProducts();
 
     // Check if both products and cart data have finished loading
@@ -34,40 +33,30 @@ const Home: NextPage = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Bringmeister Coding Challenge</title>
-            </Head>
+        <>
             {isLoading ? (
                 <Loading />
             ) : (
                 <>
-                    <header>
-                        <Search
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery}
-                        />
-                        <Cart />
-                    </header>
+                    <Header
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
+                    />
                     <main className={styles.main}>
-                        <h1>Products</h1>
-                        <pre data-testid="productCount">
-                            {JSON.stringify(
+                        <ProductList
+                            listName="Products"
+                            itemCount={JSON.stringify(
                                 products.data?.pageInfo.totalCount,
                                 null,
                                 4
-                            )}{" "}
-                            Products
-                        </pre>
-                        <ProductList
+                            )}
                             products={products.data?.edges}
                             searchQuery={searchQuery}
                         />
                     </main>
-                    <Footer />
                 </>
             )}
-        </div>
+        </>
     );
 };
 export default Home;
