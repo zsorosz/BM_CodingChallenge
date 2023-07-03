@@ -30,8 +30,6 @@ const Tile: React.FunctionComponent<TileProps> = ({
                 width={300}
                 height={300}
                 alt={name}
-                placeholder="blur"
-                blurDataURL="/bm_logo.jpg"
             />
             <h2>{name}</h2>
             <h3>

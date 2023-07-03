@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     // Check if both products and cart data have finished loading
     // Set the isLoading state to false when both are loaded
     useEffect(() => {
-        if (products.data && cart?.data) {
+        if (products.data && cart?.data && canRender) {
             setIsLoading(false);
         }
     }, [products.loading, cart?.loading]);
@@ -32,8 +32,6 @@ const Home: NextPage = () => {
     useEffect(() => {
         setCanRender(true);
     }, []);
-
-    if (!canRender) <Loading />;
 
     return (
         <div className={styles.container}>
