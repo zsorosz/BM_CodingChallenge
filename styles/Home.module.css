@@ -1,11 +1,4 @@
-.container {
-  min-height: 100vh;
-  width: 100vw;
-  background-color: rgb(250, 243, 234);
-  padding: 1rem;
-} 
-
-.container header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,16 +6,12 @@
   gap: 2rem;
 }
 
-.container input {
+.header input {
   flex: 1;
   border: 1px solid grey;
   border-radius: 5px;
   height: 100%;
   padding: 0 1rem;
-}
-
-.container h1 {
-  margin: 0;
 }
 
 .cart {
@@ -43,10 +32,14 @@
   align-items: center;
 }
 
+.main h1 {
+  margin: 0;
+}
+
 .grid {
   display: grid;
   grid-auto-rows: min-content;
-  grid-template-columns: repeat(auto-fit, minmax(95vw, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(90vw, 1fr));
   justify-content: center;
   gap: 1rem;
   list-style: none;
@@ -91,8 +84,5 @@
   .grid {
     width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  .container {
-    padding: 2rem 4rem;
   }
 }
